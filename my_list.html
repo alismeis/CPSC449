@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My List | StreamFlix</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <a href="landing_page.html" class="logo">STREAMFLIX</a>
+        <nav>
+            <ul>
+                <li><a href="landing_page.html">Home</a></li>
+                <li><a href="catalog.html">Catalog</a></li>
+                <li><a href="my_list.html" class="active">My List</a></li>
+                <li><a href="about_us.html">About Us</a></li>
+            </ul>
+        </nav>
+        <div class="header-right">
+            <div class="search-icon" id="search-toggle" aria-label="Search">Search Icon</div>
+            <div class="profile-menu" id="profile_id">
+                <div class="profile-icon" aria-label="Profile">Profile Icon</div>
+            </div>
+        </div>
+    </header>
+
+    <section class="my-list-section">
+            <!-- Watchlist Section -->
+            <section class="content-section" id="watchlist_section">
+                <h2 class="row-title">Watchlist</h2>
+                <div class="content-row" id="watchlist_items">
+                    <!-- Dynamically populated items -->
+                    <div class="content-item" data-content-id="4001">
+                        <div class="item-details">
+                            <h3>Movie Title</h3>
+                        </div>
+                    </div>
+                    <!-- More items -->
+                </div>
+            </section>
+
+            <!-- Favorites Section -->
+            <section class="content-section" id="favorites_section">
+                <h2 class="row-title">Favorites</h2>
+                <div class="content-row" id="favorites_items">
+                    <!-- Dynamically populated items -->
+                    <div class="content-item" data-content-id="5001">
+                        <div class="item-details">
+                            <h4>Movie Title</h4>
+                            <div class="favorite-row">
+                                <div class="content-item" data-content-id="4001"></div>
+                                <div class="content-item" data-content-id="2002"></div>
+                                <div class="content-item" data-content-id="2003"></div>
+                                <div class="content-item" data-content-id="2004"></div>
+                                <div class="content-item" data-content-id="2005"></div>
+                                <div class="content-item" data-content-id="2006"></div>
+                                <div class="content-item" data-content-id="2007"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- More items will be added dynamically -->
+                </div>
+            </section>
+
+            <!-- Empty State Message -->
+            <div id="empty-list-message" class="empty-state" style="display: none;">
+                <p>Your list is empty. Start adding movies from the catalog!</p>
+                <a href="catalog.html" class="btn btn-primary">Explore Catalog</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="copyright">&copy; 2025 BlahBlah, Inc. (LOL)</div>
+    </footer>
+
+    <script>
+        // JavaScript to handle list interactions
+        function playContent(contentId) {
+            console.log(`Playing content ${contentId}`);
+            // Implement play functionality
+        }
+
+        function removeFromList(contentId) {
+            console.log(`Removing content ${contentId} from list`);
+            // Implement remove functionality
+            // Update UI
+            // Check if list is empty and show empty state
+        }
+
+        function checkListState() {
+            const watchlistItems = document.getElementById('watchlist_items');
+            const favoritesItems = document.getElementById('favorites_items');
+            const emptyMessage = document.getElementById('empty-list-message');
+
+            if (watchlistItems.children.length === 0 && favoritesItems.children.length === 0) {
+                emptyMessage.style.display = 'block';
+            } else {
+                emptyMessage.style.display = 'none';
+            }
+        }
+
+        // Call checkListState on page load
+        document.addEventListener('DOMContentLoaded', checkListState);
+    </script>
+</body>
+</html>

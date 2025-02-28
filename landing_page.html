@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Streaming Service Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@100;300;400;500;700;800;900&display=swap">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Alegreya Sans', sans-serif;
+        }
+        
+        body {
+            background-color: #141414;
+            color: #ffffff;
+        }
+
+        /* Feel free to change this one up; this is just a proto */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 10;
+            background-color: rgba(20, 20, 20, 0.8); 
+        }
+        
+        .logo {
+            color: #e50914;
+            font-size: 32px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: #e5e5e5;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        nav ul li a:hover {
+            color: #ffffff;
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+        }
+        
+        .search-icon, .profile-icon {
+            color: #ffffff;
+            font-size: 20px;
+            margin-left: 20px;
+            cursor: pointer;
+        }
+        
+        /* Primary Content; Super prominent piece; should randomize it or something */
+        .feature {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 0 50px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0.4) 100%), url("/api/placeholder/1600/900") center/cover no-repeat;
+        }
+        
+        .featured-content {
+            max-width: 500px;
+        }
+        
+        .feature-title {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+        
+        .feature-description {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #e5e5e5;
+            font-weight: 300;
+        }
+        
+        .feature-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn-play {
+            background-color: #ffffff;
+            color: #000000;
+            display: flex;
+            align-items: center;
+        }
+        
+        .btn-more {
+            background-color: rgba(109, 109, 110, 0.7);
+            color: #ffffff;
+        }
+        
+        /* Carousels for recommendations or current trends */
+        .content-section {
+            padding: 40px 50px;
+        }
+        
+        .row-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .content-row {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            padding-bottom: 30px;
+        }
+        
+        .content-item {
+            min-width: 200px;
+            height: 120px;
+            background-color: #333;
+            border-radius: 4px;
+            transition: transform 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .content-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .content-thumbnail {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        
+        .content-info {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0));
+            padding: 10px;
+            border-radius: 0 0 4px 4px;
+        }
+        
+        .content-title {
+            font-size: 14px;
+            margin-bottom: 2px;
+        }
+        
+        .content-duration {
+            font-size: 12px;
+            color: #aaa;
+        }
+        
+        /* This needs to be aligned with the db for progress in percent or float. */
+        .playback-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            background-color: #e50914;
+        }
+        
+        /* Profile Menu */
+        .profile-menu {
+            position: relative;
+            cursor: pointer;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 30px 50px;
+            color: #757575;
+            text-align: center;
+        }
+
+        /* up to you guys for a name, I don't mind any */
+        .copyright {
+            font-size: 12px;
+            font-weight: 300;
+        }
+        
+        /* Media Queries */
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+            }
+            
+            nav ul li {
+                margin-left: 15px;
+            }
+            
+            .feature {
+                padding: 0 20px;
+            }
+            
+            .feature-title {
+                font-size: 32px;
+            }
+            
+            .content-section {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <a href="#" class="logo">STREAMFLIX</a>
+        <nav>
+            <ul>
+                <!-- Maybe more items in here later ? -->
+                <li><a href="landing_page.html" class="active">Home</a></li>
+                <li><a href="catalog.html">Catalog</a></li>
+                <li><a href="my-list.html">My List</a></li>
+            </ul>
+        </nav>
+        <div class="header-right">
+            <div class="search-icon" id="search-toggle" aria-label="Search">Search Icon</div>
+            <div class="profile-menu" id="profile_id">
+                <div class="profile-icon" aria-label="Profile">Profile Icon</div>
+                <!-- Dropdown for My Profile/ Settings/ etc. -->
+            </div>
+        </div>
+    </header>
+
+    <!-- Featured Content -->
+    <section class="feature" id="featured_content_id">
+        <div class="feature-content">
+            <h1 class="feature-title" id="featured_title">Super Insane Media</h1>
+            <p class="feature-description" id="featured_description">Gibberish for future population and edit</p>
+            <div class="feature-buttons">
+                <button class="btn btn-play" data-content-id="12345" onclick="playContent(this.getAttribute('data-content-id'))">Play</button>
+                <button class="btn btn-more" data-content-id="12345" onclick="showContentDetails(this.getAttribute('data-content-id'))">More Info</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Sections -->
+    <section class="content-section" id="recommendation_section">
+        <h2 class="row-title">Popular on StreamFlix</h2>
+        <div class="content-row" id="recommendation_list">
+            <!-- recommendation_list should be used to fill this up with items -->
+            <div class="content-item" data-content-id="1001">
+                <div class="playback-progress" style="width: 65%;" title="65% watched"></div>
+            </div>
+            <div class="content-item" data-content-id="1002"></div>
+            <div class="content-item" data-content-id="1003"></div>
+            <div class="content-item" data-content-id="1004"></div>
+            <div class="content-item" data-content-id="1005"></div>
+            <div class="content-item" data-content-id="1006"></div>
+            <div class="content-item" data-content-id="1007"></div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <h2 class="row-title">Trending Now</h2>
+        <div class="content-row">
+            <div class="content-item" data-content-id="2001"></div>
+            <div class="content-item" data-content-id="2002"></div>
+            <div class="content-item" data-content-id="2003"></div>
+            <div class="content-item" data-content-id="2004"></div>
+            <div class="content-item" data-content-id="2005"></div>
+            <div class="content-item" data-content-id="2006"></div>
+            <div class="content-item" data-content-id="2007"></div>
+        </div>
+    </section>
+
+    <section class="content-section" id="watch_history_section">
+        <h2 class="row-title">Continue Watching</h2>
+        <div class="content-row" id="history_list">
+            <!-- any item in watch_history that is not finished or close to finished should have priority -->
+            <div class="content-item" data-content-id="3001">
+                <div class="playback-progress" style="width: 45%;" title="45% watched"></div>
+            </div>
+            <div class="content-item" data-content-id="3002">
+                <div class="playback-progress" style="width: 72%;" title="72% watched"></div>
+            </div>
+            <div class="content-item" data-content-id="3003">
+                <div class="playback-progress" style="width: 15%;" title="15% watched"></div>
+            </div>
+            <div class="content-item" data-content-id="3004">
+                <div class="playback-progress" style="width: 89%;" title="89% watched"></div>
+            </div>
+            <div class="content-item" data-content-id="3005">
+                <div class="playback-progress" style="width: 38%;" title="38% watched"></div>
+            </div>
+            <div class="content-item" data-content-id="3006">
+                <div class="playback-progress" style="width: 51%;" title="51% watched"></div>
+            </div>
+            <div class="content-item" data-content-id="3007">
+                <div class="playback-progress" style="width: 25%;" title="25% watched"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="copyright">
+            &copy; 2025 BlahBlah, Inc. (LOL)
+        </div>
+    </footer>
+
+    <script>
+        function playContent(content_id) {
+            console.log(`Playing content ${content_id}`);
+            // This would redirect to video player or start playback; probably another page dedicated to playback
+            // Would use content_id to fetch video_url from Storage table
+        }
+        
+        function showContentDetails(content_id) {
+            console.log(`Showing details for content ${content_id}`);
+            // This would open a modal with content details; maybe dropdown? idk
+            // Would fetch title, description, duration_minutes, etc. from Content table
+        }
+        
+        // This should be on exit of the playback page to update ? not sure
+        function updateWatchHistory(content_id, playback_progress) {
+            console.log(`Updating watch history for content ${content_id}: ${playback_progress}%`);
+            // Would make an API call to update the WatchHistory table (new percentage, rewatch, or finished)
+        }
+    </script>
+</body>
+</html>

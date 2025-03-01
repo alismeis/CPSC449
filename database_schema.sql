@@ -14,6 +14,15 @@ CREATE TABLE Profile (
   FOREIGN KEY (user_id) REFERENCES User(user_id)
 );
 
+CREATE TABLE Content (
+  content_id INT PRIMARY KEY,
+  title VARCHAR(255),
+  genre VARCHAR(100),
+  releasedate DATE,
+  duration INT,
+  description TEXT
+);
+
 CREATE TABLE WatchHistory (
   history_id INT PRIMARY KEY,
   profile_id INT,
@@ -24,15 +33,6 @@ CREATE TABLE WatchHistory (
   FOREIGN KEY (profile_id) REFERENCES Profile(profile_id),
   FOREIGN KEY (content_id) REFERENCES Content(content_id),
   FOREIGN KEY (user_id) REFERENCES User(user_id)
-);
-
-CREATE TABLE Content (
-  content_id INT PRIMARY KEY,
-  title VARCHAR(255),
-  genre VARCHAR(100),
-  releasedate DATE,
-  duration INT,
-  description TEXT
 );
 
 CREATE TABLE Ratings (

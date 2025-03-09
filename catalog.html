@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StreamFlix Catalog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@100;300;400;500;700;800;900&display=swap">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <a href="#" class="logo">STREAMFLIX</a>
+        <nav>
+            <ul>
+                <li><a href="landing_page.html">Home</a></li>
+                <li><a href="catalog.html" class="active">Catalog</a></li>
+                <li><a href="my_list.html">My List</a></li>
+                <li><a href="about_us.html">About Us</a></li>
+            </ul>
+        </nav>
+        <div class="header-right">
+            <div class="search-icon" id="search-toggle">
+                <i class="fas fa-search"></i>
+            </div>
+            <div class="profile-menu" id="profile_id">
+                <div class="profile-icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <!-- Dropdown for My Profile/ Settings/ etc. -->
+            </div>
+        </div>
+    </header>
+
+    <!-- Filter Section -->
+    <section class="filter-section">
+        <div class="filter-container">
+            <div class="filter-group">
+                <!-- I honestly have nothing here, there's so much to add -->
+                <label for="genre-filter">Genre</label>
+                <select id="genre-filter" class="filter-select">
+                    <option value="all">All Genres</option>
+                    <option value="action">Action</option>
+                    <option value="comedy">Comedy</option>
+                    <option value="drama">Drama</option>
+                    <option value="sci-fi">Sci-Fi</option>
+                    <option value="horror">Horror</option>
+                    <option value="documentary">Documentary</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <!-- Definitely a way to implement descending until some year with code -->
+                <label for="release-filter">Release Year</label>
+                <select id="release-filter" class="filter-select">
+                    <option value="all">All Years</option>
+                    <option value="2025">2025</option>
+                    <option value="2024">2024</option>
+                    <option value="older">Older</option>
+                </select>
+            </div>
+            <div class="filter-group">
+            
+                <label for="sort-filter">Sort By</label>
+                <select id="sort-filter" class="filter-select">
+                    <option value="popular">Most Popular</option>
+                    <option value="recent">Recently Added</option>
+                    <option value="rating">Highest Rated</option>
+                </select>
+            </div>
+            <button id="apply-filters" class="btn btn-filter">Apply Filters</button>
+        </div>
+    </section>
+
+    <!-- Catalog Grid -->
+    <section class="catalog-section">
+        <h1 class="catalog-title">Browse Our Catalog</h1>
+        
+        <div class="catalog-grid" id="catalog_grid">
+            <!-- These would be populated from the Content table in the database -->
+            <div class="catalog-item" data-content-id="4001">
+                <div class="catalog-thumbnail"></div>
+                <div class="catalog-info">
+                    <h3 class="catalog-item-title">Action Adventure Movie</h3>
+                    <div class="catalog-item-meta">
+                        <span class="catalog-item-year">2024</span>
+                        <span class="catalog-item-genre">Action</span>
+                        <span class="catalog-item-duration">120 min</span>
+                    </div>
+                    <div class="catalog-item-rating">Insert Stars Here using Data</div>
+                    <div class="catalog-item-buttons">
+                        <button class="btn btn-sm btn-play" data-content-id="4001" onclick="playContent(this.getAttribute('data-content-id'))">Play</button>
+                        <button class="btn btn-sm btn-add" data-content-id="4001" onclick="addToMyList(this.getAttribute('data-content-id'))">+ My List</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="catalog-item" data-content-id="4002">
+                <div class="catalog-thumbnail"></div>
+                <div class="catalog-info">
+                    <h3 class="catalog-item-title">Hilarious Comedy</h3>
+                    <div class="catalog-item-meta">
+                        <span class="catalog-item-year">2023</span>
+                        <span class="catalog-item-genre">Comedy</span>
+                        <span class="catalog-item-duration">95 min</span>
+                    </div>
+                    <div class="catalog-item-rating">Insert Stars Here using Data</div>
+                    <div class="catalog-item-buttons">
+                        <button class="btn btn-sm btn-play" data-content-id="4002" onclick="playContent(this.getAttribute('data-content-id'))">Play</button>
+                        <button class="btn btn-sm btn-add" data-content-id="4002" onclick="addToMyList(this.getAttribute('data-content-id'))">+ My List</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="catalog-item" data-content-id="4003">
+                <div class="catalog-thumbnail"></div>
+                <div class="catalog-info">
+                    <h3 class="catalog-item-title">Emotional Drama</h3>
+                    <div class="catalog-item-meta">
+                        <span class="catalog-item-year">2025</span>
+                        <span class="catalog-item-genre">Drama</span>
+                        <span class="catalog-item-duration">135 min</span>
+                    </div>
+                    <div class="catalog-item-rating">Insert Stars Here using Data</div>
+                    <div class="catalog-item-buttons">
+                        <button class="btn btn-sm btn-play" data-content-id="4003" onclick="playContent(this.getAttribute('data-content-id'))">Play</button>
+                        <button class="btn btn-sm btn-add" data-content-id="4003" onclick="addToMyList(this.getAttribute('data-content-id'))">+ My List</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="catalog-item" data-content-id="4004">
+                <div class="catalog-thumbnail"></div>
+                <div class="catalog-info">
+                    <h3 class="catalog-item-title">Space Odyssey</h3>
+                    <div class="catalog-item-meta">
+                        <span class="catalog-item-year">2024</span>
+                        <span class="catalog-item-genre">Sci-Fi</span>
+                        <span class="catalog-item-duration">110 min</span>
+                    </div>
+                    <div class="catalog-item-rating">Insert Stars Here using Data</div>
+                    <div class="catalog-item-buttons">
+                        <button class="btn btn-sm btn-play" data-content-id="4004" onclick="playContent(this.getAttribute('data-content-id'))">Play</button>
+                        <button class="btn btn-sm btn-add" data-content-id="4004" onclick="addToMyList(this.getAttribute('data-content-id'))">+ My List</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="catalog-item" data-content-id="4005">
+                <div class="catalog-thumbnail"></div>
+                <div class="catalog-info">
+                    <h3 class="catalog-item-title">Terrifying Night</h3>
+                    <div class="catalog-item-meta">
+                        <span class="catalog-item-year">2022</span>
+                        <span class="catalog-item-genre">Horror</span>
+                        <span class="catalog-item-duration">98 min</span>
+                    </div>
+                    <div class="catalog-item-rating">Insert Stars Here using Data</div>
+                    <div class="catalog-item-buttons">
+                        <button class="btn btn-sm btn-play" data-content-id="4005" onclick="playContent(this.getAttribute('data-content-id'))">Play</button>
+                        <button class="btn btn-sm btn-add" data-content-id="4005" onclick="addToMyList(this.getAttribute('data-content-id'))">+ My List</button>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="copyright">
+            &copy; 2025 BlahBlah, Inc. (LOL)
+        </div>
+    </footer>
+
+    <!-- Properly put this into app.js later -->
+    <script>
+        function playContent(content_id) {
+            console.log(`Playing content ${content_id}`);
+        }
+        
+        function addToMyList(content_id) {
+            console.log(`Adding content ${content_id} to My List`);
+        }
+        
+        // Filter functionality
+        document.getElementById('apply-filters').addEventListener('click', function() {
+            const genre = document.getElementById('genre-filter').value;
+            const releaseYear = document.getElementById('release-filter').value;
+            const sortBy = document.getElementById('sort-filter').value;
+            
+            console.log(`Filtering: Genre=${genre}, Year=${releaseYear}, Sort=${sortBy}`);
+        });
+    </script>
+</body>
+</html>

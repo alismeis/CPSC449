@@ -4,24 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My List | StreamFlix</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@100;300;400;500;700;800;900&display=swap">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!-- Header -->
     <header>
-        <a href="landing_page.html" class="logo">STREAMFLIX</a>
+        <a href="#" class="logo">STREAMFLIX</a>
         <nav>
             <ul>
                 <li><a href="landing_page.html">Home</a></li>
-                <li><a href="catalog.html">Catalog</a></li>
-                <li><a href="my_list.html" class="active">My List</a></li>
+                <li><a href="catalog.html" class="active">Catalog</a></li>
+                <li><a href="my_list.html">My List</a></li>
                 <li><a href="about_us.html">About Us</a></li>
             </ul>
         </nav>
         <div class="header-right">
-            <div class="search-icon" id="search-toggle" aria-label="Search">Search Icon</div>
+            <div class="search-icon" id="search-toggle">
+                <i class="fas fa-search"></i>
+            </div>
             <div class="profile-menu" id="profile_id">
-                <div class="profile-icon" aria-label="Profile">Profile Icon</div>
+                <div class="profile-icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <!-- Dropdown for My Profile/ Settings/ etc. -->
             </div>
         </div>
     </header>

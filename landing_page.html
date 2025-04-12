@@ -32,6 +32,7 @@
 
     <!-- Featured Content -->
     <section class="feature" id="featured_content_id">
+        <div class="feature-background" id="feature_background"></div> <!-- NEW -->
         <div class="feature-content">
             <h1 class="feature-title" id="featured_title">Super Insane Media</h1>
             <p class="feature-description" id="featured_description">Gibberish for future population and edit</p>
@@ -46,7 +47,6 @@
     <section class="content-section" id="recommendation_section">
         <h2 class="row-title">Popular on StreamFlix</h2>
         <div class="content-row" id="recommendation_list">
-            <!-- recommendation_list should be used to fill this up with items -->
             <div class="content-item" data-content-id="1001">
                 <div class="playback-progress" style="width: 65%;" title="65% watched"></div>
             </div>
@@ -59,9 +59,9 @@
         </div>
     </section>
 
-    <section class="content-section">
+    <section class="content-section" id="trending_section">
         <h2 class="row-title">Trending Now</h2>
-        <div class="content-row">
+        <div class="content-row" id="trending_list">
             <div class="content-item" data-content-id="2001"></div>
             <div class="content-item" data-content-id="2002"></div>
             <div class="content-item" data-content-id="2003"></div>
@@ -108,23 +108,64 @@
     </footer>
 
     <script>
-        function playContent(content_id) {
-            console.log(`Playing content ${content_id}`);
-            // This would redirect to video player or start playback; probably another page dedicated to playback
-            // Would use content_id to fetch video_url from Storage table
+        const apiKey = '4383cbb6d615b6c4b1804ba2dd6982e3';
+        const baseImgUrl = 'https://image.tmdb.org/t/p/original'; //to fit
+    
+        async function fetchTrendingMovies() {
+            const response = await fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${apiKey}`);
+            const data = await response.json();
+            populateContentSection('recommendation_list', data.results.slice(0, 7));
+        }
+
+        async function setupFeatureSlideshow() {
+            const response = await fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${apiKey}`);
+            const data = await response.json();
+            const backdrops = data.results
+            .filter(movie => movie.backdrop_path)
+            .slice(0, 5) // get first 5 backdrops
+            .map(movie => baseImgUrl + movie.backdrop_path);
+        
+            let current = 0;
+            const bgElement = document.getElementById('feature_background');
+            
+            function updateBackground() {
+                bgElement.style.backgroundImage = `url('${backdrops[current]}')`;
+                current = (current + 1) % backdrops.length;
+            }
+            
+            updateBackground();
+            setInterval(updateBackground, 5000); 
         }
         
-        function showContentDetails(content_id) {
-            console.log(`Showing details for content ${content_id}`);
-            // This would open a modal with content details; maybe dropdown? idk
-            // Would fetch title, description, duration_minutes, etc. from Content table
+        async function fetchTrendingNow() {
+            const response = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}`);const data = await response.json();
+            populateContentSection('trending_list', data.results.slice(0, 10));
+            }
+
+        function populateContentSection(sectionId, movies) {
+            const container = document.getElementById(sectionId);
+            const items = container.querySelectorAll('.content-item');
+
+    items.forEach((box, i) => {
+        const movie = movies[i];
+        if (movie) {
+            box.setAttribute('data-content-id', movie.id);
+            box.innerHTML = `
+                <img src="${baseImgUrl + movie.poster_path}" 
+                     alt="${movie.title}" 
+                     title="${movie.title}" 
+                     class="movie-poster">
+            `;
         }
-        
-        // This should be on exit of the playback page to update ? not sure
-        function updateWatchHistory(content_id, playback_progress) {
-            console.log(`Updating watch history for content ${content_id}: ${playback_progress}%`);
-            // Would make an API call to update the WatchHistory table (new percentage, rewatch, or finished)
-        }
+    });
+}
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchTrendingMovies();
+            fetchTrendingNow();
+            setupFeatureSlideshow();
+        });
+
     </script>
+<script src="main.js"></script>
 </body>
 </html>

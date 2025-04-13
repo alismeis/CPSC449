@@ -28,14 +28,12 @@
                 <div class="profile-icon">
                     <i class="fas fa-user"></i>
                 </div>
-                <!-- Dropdown for My Profile/ Settings/ etc. -->
             </div>
         </div>
     </header>
 
-    <!-- Featured Content -->
     <section class="feature" id="featured_content_id">
-        <div class="feature-background" id="feature_background"></div> <!-- NEW -->
+        <div class="feature-background" id="feature_background"></div>
         <div class="feature-content">
             <h1 class="feature-title" id="featured_title">Super Insane Media</h1>
             <p class="feature-description" id="featured_description">Gibberish for future population and edit</p>
@@ -125,7 +123,7 @@
             const data = await response.json();
             const backdrops = data.results
             .filter(movie => movie.backdrop_path)
-            .slice(0, 5) // get first 5 backdrops
+            .slice(0, 5) // gets first 5 backdrops
             .map(movie => baseImgUrl + movie.backdrop_path);
         
             let current = 0;

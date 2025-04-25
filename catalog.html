@@ -40,32 +40,23 @@
                 <!-- I honestly have nothing here, there's so much to add -->
                 <label for="genre-filter">Genre</label>
                 <select id="genre-filter" class="filter-select">
-                    <option value="all">All Genres</option>
-                    <option value="action">Action</option>
-                    <option value="comedy">Comedy</option>
-                    <option value="drama">Drama</option>
-                    <option value="sci-fi">Sci-Fi</option>
-                    <option value="horror">Horror</option>
-                    <option value="documentary">Documentary</option>
+                    <!-- Populated Filters Dynamically-->
                 </select>
             </div>
             <div class="filter-group">
                 <!-- Definitely a way to implement descending until some year with code -->
                 <label for="release-filter">Release Year</label>
                 <select id="release-filter" class="filter-select">
-                    <option value="all">All Years</option>
-                    <option value="2025">2025</option>
-                    <option value="2024">2024</option>
-                    <option value="older">Older</option>
+                    <!-- Populated Filters Dynamically-->
                 </select>
             </div>
             <div class="filter-group">
             
                 <label for="sort-filter">Sort By</label>
                 <select id="sort-filter" class="filter-select">
-                    <option value="popular">Most Popular</option>
-                    <option value="recent">Recently Added</option>
-                    <option value="rating">Highest Rated</option>
+                    <option value="popularity.desc">Most Popular</option>
+                    <option value="primary_release_date.desc">Recently Added</option>
+                    <option value="vote_average.desc">Highest Rated</option>
                 </select>
             </div>
             <button id="apply-filters" class="btn btn-filter">Apply Filters</button>
@@ -77,91 +68,8 @@
         <h1 class="catalog-title">Browse Our Catalog</h1>
         
         <div class="catalog-grid" id="catalog_grid">
-            <!-- These would be populated from the Content table in the database -->
-            <div class="catalog-item" data-content-id="4001">
-                <div class="catalog-thumbnail"></div>
-                <div class="catalog-info">
-                    <h3 class="catalog-item-title">Action Adventure Movie</h3>
-                    <div class="catalog-item-meta">
-                        <span class="catalog-item-year">2024</span>
-                        <span class="catalog-item-genre">Action</span>
-                        <span class="catalog-item-duration">120 min</span>
-                    </div>
-                    <div class="catalog-item-rating">Insert Stars Here using Data</div>
-                    <div class="catalog-item-buttons">
-                        <button class="btn btn-sm btn-play" data-content-id="4001" onclick="playContent(this.getAttribute('data-content-id'))">Play</button>
-                        <button class="btn btn-sm btn-add" data-content-id="4001" onclick="addToMyList(this.getAttribute('data-content-id'))">+ My List</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="catalog-item" data-content-id="4002">
-                <div class="catalog-thumbnail"></div>
-                <div class="catalog-info">
-                    <h3 class="catalog-item-title">Hilarious Comedy</h3>
-                    <div class="catalog-item-meta">
-                        <span class="catalog-item-year">2023</span>
-                        <span class="catalog-item-genre">Comedy</span>
-                        <span class="catalog-item-duration">95 min</span>
-                    </div>
-                    <div class="catalog-item-rating">Insert Stars Here using Data</div>
-                    <div class="catalog-item-buttons">
-                        <button class="btn btn-sm btn-play" data-content-id="4002" onclick="playContent(this.getAttribute('data-content-id'))">Play</button>
-                        <button class="btn btn-sm btn-add" data-content-id="4002" onclick="addToMyList(this.getAttribute('data-content-id'))">+ My List</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="catalog-item" data-content-id="4003">
-                <div class="catalog-thumbnail"></div>
-                <div class="catalog-info">
-                    <h3 class="catalog-item-title">Emotional Drama</h3>
-                    <div class="catalog-item-meta">
-                        <span class="catalog-item-year">2025</span>
-                        <span class="catalog-item-genre">Drama</span>
-                        <span class="catalog-item-duration">135 min</span>
-                    </div>
-                    <div class="catalog-item-rating">Insert Stars Here using Data</div>
-                    <div class="catalog-item-buttons">
-                        <button class="btn btn-sm btn-play" data-content-id="4003" onclick="playContent(this.getAttribute('data-content-id'))">Play</button>
-                        <button class="btn btn-sm btn-add" data-content-id="4003" onclick="addToMyList(this.getAttribute('data-content-id'))">+ My List</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="catalog-item" data-content-id="4004">
-                <div class="catalog-thumbnail"></div>
-                <div class="catalog-info">
-                    <h3 class="catalog-item-title">Space Odyssey</h3>
-                    <div class="catalog-item-meta">
-                        <span class="catalog-item-year">2024</span>
-                        <span class="catalog-item-genre">Sci-Fi</span>
-                        <span class="catalog-item-duration">110 min</span>
-                    </div>
-                    <div class="catalog-item-rating">Insert Stars Here using Data</div>
-                    <div class="catalog-item-buttons">
-                        <button class="btn btn-sm btn-play" data-content-id="4004" onclick="playContent(this.getAttribute('data-content-id'))">Play</button>
-                        <button class="btn btn-sm btn-add" data-content-id="4004" onclick="addToMyList(this.getAttribute('data-content-id'))">+ My List</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="catalog-item" data-content-id="4005">
-                <div class="catalog-thumbnail"></div>
-                <div class="catalog-info">
-                    <h3 class="catalog-item-title">Terrifying Night</h3>
-                    <div class="catalog-item-meta">
-                        <span class="catalog-item-year">2022</span>
-                        <span class="catalog-item-genre">Horror</span>
-                        <span class="catalog-item-duration">98 min</span>
-                    </div>
-                    <div class="catalog-item-rating">Insert Stars Here using Data</div>
-                    <div class="catalog-item-buttons">
-                        <button class="btn btn-sm btn-play" data-content-id="4005" onclick="playContent(this.getAttribute('data-content-id'))">Play</button>
-                        <button class="btn btn-sm btn-add" data-content-id="4005" onclick="addToMyList(this.getAttribute('data-content-id'))">+ My List</button>
-                    </div>
-                </div>
-            </div>
+            <!-- Populated Filters Dynamically-->
+        </div>
     </section>
 
     <!-- Footer -->
@@ -171,24 +79,125 @@
         </div>
     </footer>
 
+
     <!-- Properly put this into app.js later -->
     <script>
+        const apiKey = '4383cbb6d615b6c4b1804ba2dd6982e3'; 
+        const baseImgUrl = 'https://image.tmdb.org/t/p/w300';
+        
+        // Play / Add to List Buttons
         function playContent(content_id) {
             console.log(`Playing content ${content_id}`);
+              // still need to implement navigation to player page
         }
         
         function addToMyList(content_id) {
             console.log(`Adding content ${content_id} to My List`);
+            // still need to implement adding to my list
+        }
+        
+        // Genre Dropdown
+        async function loadGenres() {
+            const response = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=en-US`);
+            const data = await response.json();
+            const genreSelect = document.getElementById('genre-filter');
+        
+            genreSelect.innerHTML = '<option value="All">All Genres</option>';
+        
+            data.genres.forEach(genre => {
+                const option = document.createElement('option');
+                option.value = genre.id;
+                option.textContent = genre.name;
+                genreSelect.appendChild(option);
+            });
+        }
+        
+        // Release Year Dropdown
+        function loadYears() {
+            const yearSelect = document.getElementById('release-filter');
+            const currentYear = new Date().getFullYear();
+        
+            yearSelect.innerHTML = '<option value="All">All Years</option>';
+            // Only letting the years go from current year to 1970, can update later
+            for (let y = currentYear; y >= 1970; y--) {
+                const option = document.createElement('option');
+                option.value = y;
+                option.textContent = y;
+                yearSelect.appendChild(option);
+            }
+        }
+        
+        // Fetch and Display Movies Based on Filters
+        async function fetchAndDisplayMovies(genre, year, sortBy) {
+            let url = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&page=1`;
+        
+            if (genre !== 'All') url += `&with_genres=${genre}`;
+            if (year !== 'All') url += `&primary_release_year=${year}`;
+        
+            // Fallback to popular
+            url += `&sort_by=${sortBy || 'popularity.desc'}`;
+        
+            const res = await fetch(url);
+            const data = await res.json();
+            // Currently displays 14 cards/movies, can change later if we want more/less to display
+            renderCatalog(data.results.slice(0, 14));
+            
+        }
+        
+        // Render Movies into Catalog Grid
+        function renderCatalog(movies) {
+            console.log(`Rendering ${movies.length} movies to catalog`); // checking how many movies are being fetched/rendered
+            // console.log(movies); // showing movies being displayed
+            const container = document.getElementById('catalog_grid');
+            container.innerHTML = ''; // clear old information
+        
+            movies.forEach(movie => {
+                // Some movies don't have a poster (western movies, 2004, most popular)
+                // Implement a way to skip movies without a poster or something
+                const div = document.createElement('div');
+                div.className = 'catalog-item';
+                div.innerHTML = `
+                    <div class="catalog-thumbnail">
+                        <img src="${baseImgUrl + movie.poster_path}" alt="${movie.title}" class="movie-poster">
+                    </div>
+                    <div class="catalog-info">
+                        <h3 class="catalog-item-title">${movie.title}</h3>
+                        <div class="catalog-item-meta">
+                            <span class="catalog-item-year">${movie.release_date?.split('-')[0] || 'N/A'}</span>
+                            <span class="catalog-item-rating">${movie.vote_average ? movie.vote_average.toFixed(1) + '/10' : 'N/A'}</span>
+                        </div>
+                        <div class="catalog-item-buttons">
+                            <button class="btn btn-sm btn-play" onclick="playContent(${movie.id})">Play</button>
+                            <button class="btn btn-sm btn-add" onclick="addToMyList(${movie.id})">+ My List</button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
         }
         
         // Filter functionality
-        document.getElementById('apply-filters').addEventListener('click', function() {
+        document.getElementById('apply-filters').addEventListener('click', function () {
             const genre = document.getElementById('genre-filter').value;
             const releaseYear = document.getElementById('release-filter').value;
             const sortBy = document.getElementById('sort-filter').value;
             
-            console.log(`Filtering: Genre=${genre}, Year=${releaseYear}, Sort=${sortBy}`);
+            // quick test to check filters - update this later
+            console.log("Genre:", genre, "| Year:", releaseYear, "| Sort:", sortBy);
+
+            fetchAndDisplayMovies(genre, releaseYear, sortBy);
         });
-    </script>
+        
+        // Load genres, years, and default movies on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadGenres();
+            loadYears();
+            // initial load
+            fetchAndDisplayMovies('All', 'All', 'popularity.desc');
+        });
+
+        
+        </script>
+
 </body>
 </html>

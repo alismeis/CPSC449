@@ -100,10 +100,13 @@ nav ul li a:hover {
 }
 
 .feature-description {
-    font-size: 18px;
-    margin-bottom: 20px;
-    color: #e5e5e5;
-    font-weight: 300;
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; 
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .feature-buttons {

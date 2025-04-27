@@ -131,16 +131,22 @@
         async function setupFeatureSlideshow() {
             const response = await fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${apiKey}`);
             const data = await response.json();
-            const backdrops = data.results
-            .filter(movie => movie.backdrop_path)
-            .slice(0, 5) 
-            .map(movie => baseImgUrl + movie.backdrop_path);
+            const featuredMovies = data.results
+                .filter(movie => movie.backdrop_path)
+                .slice(0,5);
+
+            const backdrops = featuredMovies.map(movie => baseImgUrl + movie.backdrop_path);
+            
         
             let current = 0;
             const bgElement = document.getElementById('feature_background');
-            
+            const featureTitle = document.getElementById('featured_title');
+            const featureDescription = document.getElementById('featured_description');
+
             function updateBackground() {
                 bgElement.style.backgroundImage = `url('${backdrops[current]}')`;
+                featureTitle.innerHTML = featuredMovies[current].title;
+                featureDescription.innerHTML = featuredMovies[current].overview;
                 current = (current + 1) % backdrops.length;
             }
             

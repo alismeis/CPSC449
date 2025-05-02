@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StreamFlix Catalog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@100;300;400;500;700;800;900&display=swap">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <a href="#" class="logo">STREAMFLIX</a>
+        <nav>
+            <ul>
+                <li><a href="landing_page.html">Home</a></li>
+                <li><a href="catalog.html" class="active">Catalog</a></li>
+                <li><a href="my_list.html">My List</a></li>
+                <li><a href="about_us.html">About Us</a></li>
+            </ul>
+        </nav>
+        <div class="header-right">
+            <div class="search-icon" id="search-toggle">
+                <div class="search-bar" id="search-bar" style="display: none;">
+                    <input type="text" id="search-input" placeholder="Search for movies...">
+                    <button id="search-button"><i class="fas fa-search"></i></button>
+                </div>
+                <i class="fas fa-search"></i>
+            </div>
+            <div class="profile-menu" id="profile_id">
+                <div class="profile-icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <!-- Dropdown for My Profile/ Settings/ etc. -->
+            </div>
+        </div>
+    </header>
+
+    <!-- Filter Section -->
+    <section class="filter-section">
+        <div class="filter-container">
+            <div class="filter-group">
+                <!-- I honestly have nothing here, there's so much to add -->
+                <label for="genre-filter">Genre</label>
+                <select id="genre-filter" class="filter-select">
+                    <!-- Populated Filters Dynamically-->
+                </select>
+            </div>
+            <div class="filter-group">
+                <!-- Definitely a way to implement descending until some year with code -->
+                <label for="release-filter">Release Year</label>
+                <select id="release-filter" class="filter-select">
+                    <!-- Populated Filters Dynamically-->
+                </select>
+            </div>
+            <div class="filter-group">
+            
+                <label for="sort-filter">Sort By</label>
+                <select id="sort-filter" class="filter-select">
+                    <option value="popularity.desc">Most Popular</option>
+                    <option value="primary_release_date.desc">Recently Added</option>
+                    <option value="vote_average.desc">Highest Rated</option>
+                </select>
+            </div>
+            <button id="apply-filters" class="btn btn-filter">Apply Filters</button>
+        </div>
+    </section>
+
+    <!-- Catalog Grid -->
+    <section class="catalog-section">
+        <h1 class="catalog-title">Browse Our Catalog</h1>
+        
+        <div class="catalog-grid" id="catalog_grid">
+            <!-- Populated Filters Dynamically-->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="copyright">
+            &copy; 2025 BlahBlah, Inc. (LOL)
+        </div>
+    </footer>
+
+
+    <!-- Properly put this into app.js later -->
+<script src="main.js"></script>
+</body>
+</html>

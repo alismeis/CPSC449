@@ -160,7 +160,7 @@ function renderCatalog(movies) {
     });
 }
 
-// Filter functionality
+// Filter functionality test
 document.getElementById('apply-filters').addEventListener('click', function () {
     const genre = document.getElementById('genre-filter').value;
     const releaseYear = document.getElementById('release-filter').value;

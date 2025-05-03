@@ -67,12 +67,31 @@ async function fetchTrendingMovies() {
 async function fetchSearchResults(query) {
     const response = await fetch(`${tmdbBaseUrl}/search/movie?api_key=${apiKey}&query=${encodeURIComponent(query)}`);
     const data = await response.json();
-    populateContentSection('recommendation_list', data.results.slice(0, 10));
+    
+    // Check which page we're on to determine where to show results
+    const catalogGrid = document.getElementById('catalog_grid');
+    const recommendationList = document.getElementById('recommendation_list');
+    
+    if (catalogGrid) {
+        // We're on the catalog page
+        renderCatalog(data.results.slice(0, 20));
+        
+        // Update page title to show we're viewing search results
+        const catalogTitle = document.querySelector('.catalog-title');
+        if (catalogTitle) {
+            catalogTitle.textContent = `Search Results for "${query}"`;
+        }
+    } else if (recommendationList) {
+        // We're on the home page
+        populateContentSection('recommendation_list', data.results.slice(0, 10));
+    }
 }
 
 // Function to populate the content section with movies
 function populateContentSection(sectionId, movies) {
     const container = document.getElementById(sectionId);
+    if (!container) return;
+    
     container.innerHTML = ''; // Clear the container before adding new movies
     
     movies.forEach(movie => {
@@ -116,7 +135,7 @@ const searchInput = document.getElementById('search-input');
 
 // Toggle search bar visibility
 searchToggle?.addEventListener('click', () => {
-    if (searchBar.style.display === 'none') {
+    if (searchBar.style.display === 'none' || searchBar.style.display === '') {
         searchBar.style.display = 'flex';
         searchInput.focus();
     } else {
@@ -129,6 +148,12 @@ searchButton?.addEventListener('click', () => {
     const query = searchInput.value.trim();
     if (query) {
         fetchSearchResults(query);
+        
+        // Redirect to catalog page if we're not already there
+        if (!window.location.href.includes('catalog.html')) {
+            window.location.href = 'catalog.html?search=' + encodeURIComponent(query);
+            return; // Stop execution since we're redirecting
+        }
     }
 });
 
@@ -138,6 +163,12 @@ searchInput?.addEventListener('keypress', (event) => {
         const query = searchInput.value.trim();
         if (query) {
             fetchSearchResults(query);
+            
+            // Redirect to catalog page if we're not already there
+            if (!window.location.href.includes('catalog.html')) {
+                window.location.href = 'catalog.html?search=' + encodeURIComponent(query);
+                return; // Stop execution since we're redirecting
+            }
         }
     }
 });
@@ -281,15 +312,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const recommendationList = document.getElementById('recommendation_list');
     const catalogGrid = document.getElementById('catalog_grid');
     
+    // Check for search parameter in URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchQuery = urlParams.get('search');
+    
     if (recommendationList) {
-        // Home page initialization
-        fetchTrendingMovies();
+        if (searchQuery) {
+            fetchSearchResults(searchQuery);
+            if (searchInput) searchInput.value = searchQuery;
+        } else {
+            fetchTrendingMovies();
+        }
     }
     
     if (catalogGrid) {
-        // Catalog page initialization
         loadGenres();
         loadYears();
-        fetchAndDisplayMovies('All', 'All', 'popularity.desc');
+        
+        if (searchQuery) {
+            fetchSearchResults(searchQuery);
+            if (searchInput) searchInput.value = searchQuery;
+        } else {
+            fetchAndDisplayMovies('All', 'All', 'popularity.desc');
+        }
     }
 });
